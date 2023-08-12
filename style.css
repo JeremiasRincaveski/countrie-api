@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#region option:first-of-type {
+  margin-top: 1rem;
+  display: none;
+}
