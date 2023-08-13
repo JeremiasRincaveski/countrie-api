@@ -1,7 +1,6 @@
 const paises = document.querySelector('#paises')
 
-// iniciaPagina()
-procuraPais('korea')
+iniciaPagina()
 
 function chamaPais(text) {
   fetch(`https://restcountries.com/v3.1/name/${text}`)
@@ -56,14 +55,14 @@ export function procuraRegiao(regiao) {
       })
     })
     .catch(err => {
-      throw err
+      mensagemErro
     })
 }
 
 export function procuraPais(pais) {
   limpaPaises();
-
-  fetch(`https://restcountries.com/v3.1/name/${pais}`)
+  if (pais) { 
+    fetch(`https://restcountries.com/v3.1/name/${pais}`)
     .then(response => response.json())
     .then(data => {
       data.forEach(dataPais => paises.appendChild(criaDiv(dataPais)))
@@ -71,6 +70,11 @@ export function procuraPais(pais) {
     .catch(err => {
       mensagemErro()
     })
+  } else {
+    fetch(`https://restcountries.com/v3.1/all`)
+      .then(response => response.json())
+      .then(data => data.forEach(dataPais => paises.appendChild(criaDiv(dataPais))))
+  }
 }
 
 function criaDiv(element) {
