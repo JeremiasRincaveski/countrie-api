@@ -1,9 +1,7 @@
 import { procuraPais, iniciaPagina } from "./service.js";
 
-const input = document.getElementById('search')
-const label = document.querySelector(`#busca>label`)
-
-console.log(label);
+const input = document.getElementById('search');
+const label = document.querySelector(`#busca>label`);
 
 input.addEventListener('blur', () => {
   procuraPais(input.value)
@@ -14,7 +12,6 @@ label.addEventListener(`click`, () => {
 })
 
 window.addEventListener(`keydown`, e => {
-  console.log(e);
   if (e.key == `Enter`) {
     procuraPais(input.value)
   }

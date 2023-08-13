@@ -16,13 +16,15 @@ function chamaPais(text) {
       const pais = document.createElement('div');
       pais.className = 'pais'
       pais.innerHTML = `
-      <img src="${srcImg}" alt="bandeira do pais" />
-      <div>
+      <a href="pais.html?pais=${nomePais}">
+        <img src="${srcImg}" alt="bandeira do pais" />
+        <div>
         <h2>${nomePais}</h2>
         <p>Population: <span>${populacaoTotal}</span></p>
         <p>Region: <span>${regiao}</span></p>
         <p>Capital: <span>${capitalPais}</span></p>
-      </div>
+        </div>
+      </a>
       `
       
       paises.appendChild(pais);
@@ -77,6 +79,21 @@ export function procuraPais(pais) {
   }
 }
 
+export function paisExato(pais) {
+  const main = document.querySelector(`main`);
+
+  if (pais) { 
+    fetch(`https://restcountries.com/v3.1/name/${pais}?fullText=true`)
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(dataPais => main.appendChild(criaDiv(dataPais)))
+    })
+    .catch(err => {
+      throw err
+    })
+  }
+}
+
 function criaDiv(element) {
   const {
     name: {common: nomePais}, population: populacaoTotal,
@@ -87,13 +104,15 @@ function criaDiv(element) {
   const pais = document.createElement('div');
   pais.className = 'pais';
   pais.innerHTML = `
-  <img src="${srcImg}" alt="bandeira do pais" />
-  <div>
-    <h2>${nomePais}</h2>
-    <p>Population: <span>${populacaoTotal}</span></p>
-    <p>Region: <span>${regiao}</span></p>
-    <p>Capital: <span>${capitalPais}</span></p>
-  </div>
+  <a href="pais.html?pais=${nomePais}">
+        <img src="${srcImg}" alt="bandeira do pais" />
+        <div>
+        <h2>${nomePais}</h2>
+        <p>Population: <span>${populacaoTotal}</span></p>
+        <p>Region: <span>${regiao}</span></p>
+        <p>Capital: <span>${capitalPais}</span></p>
+        </div>
+      </a>
   `;
 
   return pais;
