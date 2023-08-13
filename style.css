@@ -170,3 +170,50 @@ nav {
 #menu li:hover {
   background-color: var(--very-light-gray);
 }
+
+#paises {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  align-content: start;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.pais {
+  background-color: var(--white);
+  border-radius: 7px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pais img {
+  height: 180px;
+  object-fit: fill;
+  width: 100%;
+}
+
+.pais div {
+  padding: 1.5rem;
+}
+
+.pais h2 {
+  color: var(--very-dark-blue-text);
+  font-size: var(--font-size-detail-page);
+  font-weight: var(--font-weight-800);
+  margin-bottom: 1rem;
+}
+
+.pais p {
+  font-size: var(--font-size-detail-page);
+  font-weight: var(--font-weight-600);
+  margin-bottom: .5rem;
+}
+
+.pais span {
+  font-size: var(--font-size-detail-page);
+  font-weight: var(--font-weight-300);
+}

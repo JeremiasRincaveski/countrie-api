@@ -1,3 +1,5 @@
+import { procuraRegiao } from "./service.js";
+
 const dropDow = document.getElementById('dropDow');
 const valorSelecionado = dropDow.querySelector('#options')
 const img = dropDow.querySelector('img');
@@ -8,6 +10,7 @@ const valor = dropDow.querySelector('#selected');
 valores.forEach(li => {
   li.addEventListener('click', () => {
     valor.textContent = li.textContent;
+    procuraRegiao(valor.textContent)
   })
 })
 

@@ -1,21 +1,11 @@
 const paises = document.querySelector('#paises')
 
-chamaPais('germany')
-chamaPais('United States of America')
-chamaPais('brazil')
-chamaPais('iceland')
-chamaPais('afghanistan')
-chamaPais('Åland Islands')
-chamaPais('albania')
-chamaPais('algeria')
+// iniciaPagina()
+procuraPais('korea')
 
 function chamaPais(text) {
   fetch(`https://restcountries.com/v3.1/name/${text}`)
   .then(response => response.json())
-  // .then(data => {
-  //   console.log(data)
-  //   return data;
-  // })
   .then(data => {
     data.forEach(element => {
       const {
@@ -42,4 +32,78 @@ function chamaPais(text) {
   .catch(err => {
     throw err
   })
+}
+
+function iniciaPagina() {
+  chamaPais('Germany')
+  chamaPais('United States of America')
+  chamaPais('brazil')
+  chamaPais('Iceland')
+  chamaPais('Afghanistan')
+  chamaPais('Åland Islands')
+  chamaPais('Albania')
+  chamaPais('Algeria')
+}
+
+export function procuraRegiao(regiao) {
+  limpaPaises();
+
+  fetch(`https://restcountries.com/v3.1/region/${regiao}`)
+    .then(data => data.json())
+    .then((data) => {
+      data.forEach(pais => {
+        paises.appendChild(criaDiv(pais))
+      })
+    })
+    .catch(err => {
+      throw err
+    })
+}
+
+export function procuraPais(pais) {
+  limpaPaises();
+
+  fetch(`https://restcountries.com/v3.1/name/${pais}`)
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(dataPais => paises.appendChild(criaDiv(dataPais)))
+    })
+    .catch(err => {
+      mensagemErro()
+    })
+}
+
+function criaDiv(element) {
+  const {
+    name: {common: nomePais}, population: populacaoTotal,
+    region: regiao, capital: capitalPais,
+    flags: {png: srcImg}
+  } = element;
+
+  const pais = document.createElement('div');
+  pais.className = 'pais';
+  pais.innerHTML = `
+  <img src="${srcImg}" alt="bandeira do pais" />
+  <div>
+    <h2>${nomePais}</h2>
+    <p>Population: <span>${populacaoTotal}</span></p>
+    <p>Region: <span>${regiao}</span></p>
+    <p>Capital: <span>${capitalPais}</span></p>
+  </div>
+  `;
+
+  return pais;
+}
+
+function limpaPaises() {
+  paises.innerHTML = ''
+}
+
+function mensagemErro() {
+  const div = document.createElement('div');
+  div.innerHTML = `
+    <h3>Pais não encontrado</h3>
+  `
+
+  paises.appendChild(div)
 }
