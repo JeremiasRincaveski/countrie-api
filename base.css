@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+:root {
+  --dark-blue: hsl(209, 23%, 22%);
+  --dark-gray: hsl(0, 0%, 52%);
+  --font-family: 'Nunito Sans', sans-serif;
+  --font-size-detail-page: 16px;
+  --font-size-homepage-items: 14px;
+  --font-weight-300: 300;
+  --font-weight-600: 600;
+  --font-weight-800: 800;
+  --very-dark-blue-text: hsl(200, 15%, 8%);
+  --very-dark-blue: hsl(207, 26%, 17%);
+  --very-light-gray: hsl(0, 0%, 98%);
+  --white: hsl(0, 0%, 100%);
+  /*
+    - [Font Awesome](https://fontawesome.com)
+    - [IcoMoon](https://icomoon.io)
+    - [Ionicons](https://ionicons.com)
+  */
+}
+
+* {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-600);
+}
+
+main {
+  background-color: var(--very-light-gray);
+  padding: 4rem 2rem 2rem 2rem;
+}

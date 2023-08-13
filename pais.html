@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pais</title>
+
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="pais.css">
+  
+  <script src="service.js" type="module" defer></script>
+
+  <title>Countries</title>
 </head>
 <body>
+  <header>
+    <h1>Where in the world?</h1>
+    <button type="button"><img src="img/moon.svg" alt="">Dark Mode</button>
+  </header>
+
+  <main>
+    <button class="button">back</button>
+    
+    <div id="descricaoPais">
+      <img src="" alt="bandeira">
+
+      <div class="descricao">
+        <h2>${nomePais}</h2>
+
+        <div class="lista">
+          <ul>
+            <li>Native Name: <span>${nomeNativo}</span></li>
+            <li>Population: <span>${populacao}</span></li>
+            <li>Region: <span>${regiao}</span></li>
+            <li>Sub Region: <span>${subRegiao}</span></li>
+            <li>Capital: <span>${Capital}</span></li>
+          </ul>
   
+          <ul>
+            <li>Top Level Domain: <span>${dominio}</span></li>
+            <li>Currencies: <span>${moeda}</span></li>
+            <li>Languages: <span>${lingua}</span></li>
+          </ul>
+        </div>
+
+        <nav>
+          <h3>Border Countries:</h3>
+          <div class="vizinhos">
+            <button class="button" type="button">${vizinho}</button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

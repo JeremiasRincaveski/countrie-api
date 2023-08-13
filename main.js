@@ -1,4 +1,4 @@
-import { procuraPais } from "./service.js";
+import { procuraPais, iniciaPagina } from "./service.js";
 
 const input = document.getElementById('search')
 const label = document.querySelector(`#busca>label`)
@@ -21,6 +21,6 @@ window.addEventListener(`keydown`, e => {
 })
 
 window.addEventListener(`load`, () => {
-  input.value = ``
-  input.focus()
+  input.value = ``;
+  iniciaPagina();
 })

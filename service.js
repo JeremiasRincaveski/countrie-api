@@ -1,6 +1,6 @@
 const paises = document.querySelector('#paises')
 
-iniciaPagina()
+// iniciaPagina()
 
 function chamaPais(text) {
   fetch(`https://restcountries.com/v3.1/name/${text}`)
@@ -33,7 +33,7 @@ function chamaPais(text) {
   })
 }
 
-function iniciaPagina() {
+export function iniciaPagina() {
   chamaPais('Germany')
   chamaPais('United States of America')
   chamaPais('brazil')
@@ -100,14 +100,14 @@ function criaDiv(element) {
 }
 
 function limpaPaises() {
-  paises.innerHTML = ''
+  paises.innerHTML = '';
 }
 
 function mensagemErro() {
   const div = document.createElement('div');
   div.innerHTML = `
     <h3>Pais não encontrado</h3>
-  `
+  `;
 
   paises.appendChild(div)
 }
