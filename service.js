@@ -57,7 +57,7 @@ export function procuraRegiao(regiao) {
       })
     })
     .catch(err => {
-      mensagemErro
+      mensagemErro()
     })
 }
 
@@ -105,14 +105,14 @@ function criaDiv(element) {
   pais.className = 'pais';
   pais.innerHTML = `
   <a href="pais.html?pais=${nomePais}">
-        <img src="${srcImg}" alt="bandeira do pais" />
-        <div>
-        <h2>${nomePais}</h2>
-        <p>Population: <span>${populacaoTotal}</span></p>
-        <p>Region: <span>${regiao}</span></p>
-        <p>Capital: <span>${capitalPais}</span></p>
-        </div>
-      </a>
+    <img src="${srcImg}" alt="bandeira do pais" />
+    <div>
+    <h2>${nomePais}</h2>
+    <p>Population: <span>${populacaoTotal}</span></p>
+    <p>Region: <span>${regiao}</span></p>
+    <p>Capital: <span>${capitalPais}</span></p>
+    </div>
+  </a>
   `;
 
   return pais;
@@ -136,45 +136,45 @@ function criaDivExata(element) {
   }
 
   for (const element in languages) {
-    linguasFaladas.push(languages[element])
+    linguasFaladas.push(languages[element]);
   }
-
-  console.log(element);
 
   const pais = document.createElement('div');
   pais.className = 'pais';
   pais.innerHTML = `
-  <div>
+  <div id="descricaoPais">
     <img src="${srcImg}" alt="bandeira do pais" />
     
-    <h2>${nomePais}</h2>
-    
-    <ul>
-      <li>Native Name: <span>${nativeName[linguaPrincipal].common}</span></li>
-      <li>Population: <span>${populacaoTotal}</span></li>
-      <li>Region: <span>${regiao}</span></li>
-      <li>Sub Region: <span>${subRegiao}</span></li>
-      <li>Capital: <span>${capitalPais}</span></li>
-    </ul>
+    <div class="descricao">
+      <h2>${nomePais}</h2>
 
-    <ul>
-      <li>Top Level Domain: <span>${dominio}</span></li>
-      <li>Currencies: <span>${currencies[moedaUsada].name}</span></li>
-      <li>Languages: <span>${linguasFaladas}</span></li>  
-    </ul>
+      <div class="lista">
+        <ul>
+          <li>Native Name: <span>${nativeName[linguaPrincipal].common}</span></li>
+          <li>Population: <span>${populacaoTotal}</span></li>
+          <li>Region: <span>${regiao}</span></li>
+          <li>Sub Region: <span>${subRegiao}</span></li>
+          <li>Capital: <span>${capitalPais}</span></li>
+        </ul>
 
-    <nav>
-      <h3>Border Countries:</h3>
-      <div class="vizinhos">
+        <ul>
+          <li>Top Level Domain: <span>${dominio}</span></li>
+          <li>Currencies: <span>${currencies[moedaUsada].name}</span></li>
+          <li>Languages: <span>${linguasFaladas}</span></li>  
+        </ul>
       </div>
-    </nav>
+        <nav>
+          <h3>Border Countries:</h3>
+          <div class="vizinhos"></div>
+        </nav>
+    </div>
   </div>
   `;
 
   const vizinhos = pais.querySelector('.vizinhos');
 
   borders.forEach(codigo => {
-    vizinhos.appendChild(chamaBorda(codigo))
+    vizinhos.appendChild(chamaBordas(codigo))
   })  
 
   return pais;
@@ -193,17 +193,23 @@ function mensagemErro() {
   paises.appendChild(div)
 }
 
-function chamaBorda(code) {
+function chamaBordas(code) {
+  const link = document.createElement('a');
+  link.className = 'button';
+
   fetch(`https://restcountries.com/v3.1/alpha/${code}`)
     .then(response => response.json())
     .then(data => {
-      const button = document.createElement('button');
-      button.className = 'button';
-      console.log(data);
-      // button.innerText = data.name.common
-      return button
+      link.innerText = data[0].name.common
+      link.href = `pais.html?pais=${data[0].name.common}`
     })
     .catch(err => {
       throw err
     })
+
+  return link
+}
+
+function chamaPaisNaBorda(code) {
+  
 }
