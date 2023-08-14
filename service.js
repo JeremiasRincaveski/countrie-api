@@ -86,7 +86,7 @@ export function paisExato(pais) {
     fetch(`https://restcountries.com/v3.1/name/${pais}?fullText=true`)
     .then(response => response.json())
     .then(data => {
-      data.forEach(dataPais => main.appendChild(criaDiv(dataPais)))
+      data.forEach(dataPais => main.appendChild(criaDivExata(dataPais)))
     })
     .catch(err => {
       throw err
@@ -118,6 +118,68 @@ function criaDiv(element) {
   return pais;
 }
 
+function criaDivExata(element) {
+  const {
+    name: {common: nomePais, nativeName }, population: populacaoTotal,
+    region: regiao, subregion: subRegiao, capital: capitalPais,
+    flags: {png: srcImg}, tld: dominio, currencies, languages, borders
+  } = element;
+
+  let linguaPrincipal, moedaUsada, linguasFaladas = [];
+
+  for (const element in nativeName) {
+    linguaPrincipal = element;
+  }
+
+  for (const element in currencies) {
+    moedaUsada = element
+  }
+
+  for (const element in languages) {
+    linguasFaladas.push(languages[element])
+  }
+
+  console.log(element);
+
+  const pais = document.createElement('div');
+  pais.className = 'pais';
+  pais.innerHTML = `
+  <div>
+    <img src="${srcImg}" alt="bandeira do pais" />
+    
+    <h2>${nomePais}</h2>
+    
+    <ul>
+      <li>Native Name: <span>${nativeName[linguaPrincipal].common}</span></li>
+      <li>Population: <span>${populacaoTotal}</span></li>
+      <li>Region: <span>${regiao}</span></li>
+      <li>Sub Region: <span>${subRegiao}</span></li>
+      <li>Capital: <span>${capitalPais}</span></li>
+    </ul>
+
+    <ul>
+      <li>Top Level Domain: <span>${dominio}</span></li>
+      <li>Currencies: <span>${currencies[moedaUsada].name}</span></li>
+      <li>Languages: <span>${linguasFaladas}</span></li>  
+    </ul>
+
+    <nav>
+      <h3>Border Countries:</h3>
+      <div class="vizinhos">
+      </div>
+    </nav>
+  </div>
+  `;
+
+  const vizinhos = pais.querySelector('.vizinhos');
+
+  borders.forEach(codigo => {
+    vizinhos.appendChild(chamaBorda(codigo))
+  })  
+
+  return pais;
+}
+
 function limpaPaises() {
   paises.innerHTML = '';
 }
@@ -129,4 +191,19 @@ function mensagemErro() {
   `;
 
   paises.appendChild(div)
+}
+
+function chamaBorda(code) {
+  fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+    .then(response => response.json())
+    .then(data => {
+      const button = document.createElement('button');
+      button.className = 'button';
+      console.log(data);
+      // button.innerText = data.name.common
+      return button
+    })
+    .catch(err => {
+      throw err
+    })
 }
