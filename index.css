@@ -1,7 +1,8 @@
 nav {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
   gap: 3rem;
   justify-content: space-between;
 }
@@ -12,7 +13,7 @@ nav {
   height: 2rem;
   position: relative;
   width: 100%;
-  flex: 1 0 20px;
+  flex: 1 0 375px;
 }
 
 #busca label {
@@ -52,7 +53,7 @@ nav {
   font-weight: var(--font-weight-300);
   height: 4rem;
   position: relative;
-  width: 15rem;
+  flex: 0 0 15rem;
 }
 
 #options {
