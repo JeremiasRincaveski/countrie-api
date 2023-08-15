@@ -13,11 +13,20 @@
   --very-dark-blue: hsl(207, 26%, 17%);
   --very-light-gray: hsl(0, 0%, 98%);
   --white: hsl(0, 0%, 100%);
-  /*
-    - [Font Awesome](https://fontawesome.com)
-    - [IcoMoon](https://icomoon.io)
-    - [Ionicons](https://ionicons.com)
-  */
+
+  --fundo: var(--white);
+  --fundo-principal: var(--very-light-gray);
+  --fonte: var(--very-dark-blue-text);
+  --placeHolder: var(--dark-gray);
+  --hover: var(--very-light-gray);
+}
+
+:root.dark {
+  --fundo: var(--dark-blue);
+  --fundo-principal: var(--very-dark-blue);
+  --fonte: var(--white);
+  --placeHolder: var(--dark-gray);
+  --hover: var(--dark-gray);
 }
 
 * {
@@ -35,6 +44,8 @@ body {
 }
 
 main {
-  background-color: var(--very-light-gray);
+  background-color: var(--fundo-principal);
   padding: 4rem 2rem 2rem 2rem;
+  color: var(--fonte);
+  min-height: calc(100vh - 110px);
 }

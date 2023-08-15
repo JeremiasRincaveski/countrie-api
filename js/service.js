@@ -20,7 +20,7 @@ function chamaPais(text) {
         <img src="${srcImg}" alt="bandeira do pais" />
         <div>
         <h2>${nomePais}</h2>
-        <p>Population: <span>${populacaoTotal}</span></p>
+        <p>Population: <span>${populacaoTotal.toLocaleString('pt-BR')}</span></p>
         <p>Region: <span>${regiao}</span></p>
         <p>Capital: <span>${capitalPais}</span></p>
         </div>
@@ -108,7 +108,7 @@ function criaDiv(element) {
     <img src="${srcImg}" alt="bandeira do pais" />
     <div>
     <h2>${nomePais}</h2>
-    <p>Population: <span>${populacaoTotal}</span></p>
+    <p>Population: <span>${populacaoTotal.toLocaleString('pt-BR')}</span></p>
     <p>Region: <span>${regiao}</span></p>
     <p>Capital: <span>${capitalPais}</span></p>
     </div>
@@ -138,7 +138,7 @@ function criaDivExata(element) {
   for (const element in languages) {
     linguasFaladas.push(languages[element]);
   }
-
+  
   const pais = document.createElement('div');
   pais.className = 'pais';
   pais.innerHTML = `
@@ -151,7 +151,7 @@ function criaDivExata(element) {
       <div class="lista">
         <ul>
           <li>Native Name: <span>${nativeName[linguaPrincipal].common}</span></li>
-          <li>Population: <span>${populacaoTotal}</span></li>
+          <li>Population: <span>${populacaoTotal.toLocaleString('pt-BR')}</span></li>
           <li>Region: <span>${regiao}</span></li>
           <li>Sub Region: <span>${subRegiao}</span></li>
           <li>Capital: <span>${capitalPais}</span></li>
@@ -173,7 +173,7 @@ function criaDivExata(element) {
 
   const vizinhos = pais.querySelector('.vizinhos');
 
-  borders.forEach(codigo => {
+  borders?.forEach(codigo => {
     vizinhos.appendChild(chamaBordas(codigo))
   })  
 
@@ -210,6 +210,15 @@ function chamaBordas(code) {
   return link
 }
 
-function chamaPaisNaBorda(code) {
-  
+export function getLista() {
+  const lista = document.getElementById('searches');
+
+  fetch(`https://restcountries.com/v3.1/all`)
+      .then(response => response.json())
+      .then(data => data.forEach(dataPais => {
+        const option = document.createElement('option');
+        option.value = dataPais.name.common
+
+        lista.appendChild(option)
+      }))
 }
